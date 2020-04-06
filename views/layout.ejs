@@ -1,0 +1,25 @@
+<!-- constant part in all pages (even the above tags) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="/css/layout.css">
+    <!-- to get individual styles of sub pages -->
+    <%- style %>
+</head>
+<body>
+    
+    <%- include('_header'); %> 
+
+    <!-- the only variable part -->
+    <%- body %> 
+    
+    
+    <%- include('_footer'); %>
+
+    <!-- to get individual scripts of sub pages -->
+    <%- script %>
+</body>
+</html>
