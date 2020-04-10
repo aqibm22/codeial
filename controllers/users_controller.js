@@ -9,6 +9,11 @@ module.exports.profile = function(req,res){
 
 // render the sign Up page
 module.exports.signUp = function(req,res){
+     // to avoid accessing of sign in page if user is logged in
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    
     return res.render('user_sign_up',{
         title : "Codeial | Sign Up"
     });
@@ -16,6 +21,11 @@ module.exports.signUp = function(req,res){
 
 //render the sign in page
 module.exports.signIn = function(req,res){
+    // to avoid accessing of sign in page if user is logged in
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+    
     return res.render('user_sign_in',{
         title : "Codeial | Sign In"
     });
@@ -51,5 +61,11 @@ module.exports.create = function(req,res){
 
 //sign in and create a session for the user
 module.exports.createSession = function(req,res){
-    //TODO later
+    return res.redirect('/');
+    // in browser type /users/profile after signing in
+}
+
+module.exports.destroySession = function(req,res){
+    req.logout();
+    return res.redirect('/');
 }

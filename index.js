@@ -5,6 +5,12 @@ const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const cookieParser = require('cookie-parser');
 
+//used for session cookie after npm install express-session
+const session = require('express-session');
+const passport = require('passport');
+const passportLocal = require('./config/passport-local-strategy');
+const MongoStore = require('connect-mongo')(session);
+
 app.use(express.urlencoded());
 
 app.use(cookieParser());
@@ -18,12 +24,42 @@ app.use(expressLayouts);
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
 
-//use express router
-app.use('/',require('./routes/index'));
+
 
 //after npm install ejs setup the view engine--
 app.set('view engine','ejs');
 app.set('views','./views');
+
+// all properties of the session-
+// mongo store is used to store the session cookie in the db
+app.use(session({
+    name : 'codeial',
+    //TODO change the secret before deployment in production mode
+    secret: 'blahsomething',
+    saveUninitialized : false, // when user is not logged in no need to store infor abt it
+    resave : false, // no need to rewrite sesion data without any change
+    cookie: {
+        maxAge : (1000*60*1000) // in ms
+    }, // to keep user logged in even after the server is killed
+    store: new MongoStore(
+        {
+            mongooseConnection: db,
+            autoRemove : 'disabled'
+        },
+        function(err){
+            console.log(err || 'connect-mongodb setup ok');
+        })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
+
+//must be placed after passport--
+//use express router
+app.use('/',require('./routes/index'));
+
 
 app.listen(port,function(err){
     if(err){
