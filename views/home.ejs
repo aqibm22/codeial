@@ -17,10 +17,16 @@
     <div id="posts-list-container">
         <ul>
             <% for(post of posts){  %>
+            <li>
                 <p>
-                    <li>
-                        <%= post.content %>
-                    </li>
+                    <!-- if the user is signed and the user who is signed is the one who has created the post the only show delete button -->
+                    <% if( (locals.user) && (locals.user.id==post.user.id)) { %>
+                    <small>
+                        <a href="/posts/destroy/<%= post.id %>">X</a>
+                    </small>
+                    <% } %>
+                    <%= post.content %>
+                    <br>
                     <small>
                         <%= post.user.name %>
                     </small>
@@ -44,13 +50,15 @@
                                     <%= comment.content %>
                                     <br>
                                     <small>
-                                        <%=  comment.user.name %>
+                                        <!-- displaying name of user who posted the comment -->
+                                        <%=  comment.user.name %> 
                                     </small>
                                 </p>
                             <% } %>
                         </ul>
                     </div>
                 </div>
+            </li>
             <% } %>
         </ul>
     </div>

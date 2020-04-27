@@ -28,11 +28,11 @@ module.exports.home = function(req,res){
     // });
 
     Post.find({})
-    .populate('user')
+    .populate('user') // user sent along with the post as done above
     .populate({
         path: 'comments',
         populate: {
-            path: 'user'
+            path: 'user' // the author of the comment is sent for every post
         }
     })
     .exec(function(err,posts){
