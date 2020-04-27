@@ -4,12 +4,11 @@ const router = express.Router();
 const passport = require('passport');
 
 const usersController = require('../controllers/users_controller');
-const usersPostsController = require('../controllers/users_posts');
+
 
 // so this will be accessed by /users/profile
 router.get('/profile', passport.checkAuthentication,usersController.profile);
-// so this will be accessed by /users/posts
-router.get('/posts',usersPostsController.posts);
+
 
 
 router.get('/sign-up',usersController.signUp);

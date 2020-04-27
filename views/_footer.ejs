@@ -1,5 +1,23 @@
 <!-- handles the footer for all pages -->
 
 <footer>
-    Page Footer
+    <div id="rights">All Rights Reserved. AqibM</div>
+
+    <div id="options-list">
+        <ul>
+            <% if (locals.user){ %>
+                <li>
+                    <a href="/users/profile">Profile</a>
+                    
+                </li>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+            <% }else{ %>
+                <li>
+                    <a href="/">Home</a>
+                </li>
+            <% } %>
+        </ul>
+    </div>
 </footer>

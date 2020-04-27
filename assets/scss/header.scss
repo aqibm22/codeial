@@ -1,0 +1,26 @@
+header{
+    background-image: linear-gradient(-30deg, #1e272c,#16161d);
+    color: white;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    div{
+        display: inline-block;
+    }
+    #company-name{
+        height: 40px;
+        width: 100px;
+        margin-top: 30px;
+    }
+    li{
+        display: inline;
+        list-style: none;
+       
+        a{
+            text-decoration: none;
+             color: white;
+             font-size: 25px;
+        }
+    }
+}
+
