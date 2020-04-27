@@ -21,8 +21,11 @@ router.get('/',homeContoller.home);
 router.use('/users',require('./users'));
 
 
-// to use posts controller-
+// to use posts route-
 router.use('/posts',require('./posts'));
+
+// to use comments route-
+router.use('/comments',require('./comments'));
 
 module.exports = router;
 
