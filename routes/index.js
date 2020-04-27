@@ -19,5 +19,10 @@ router.get('/',homeContoller.home);
 // format - router.use('/to_what_url_you_want_to_give_control'.require('./reoter_file_name'))
 //for /users request the control is given to router users.js to further acces users_controller.js 
 router.use('/users',require('./users'));
+
+
+// to use posts controller-
+router.use('/posts',require('./posts'));
+
 module.exports = router;
 
