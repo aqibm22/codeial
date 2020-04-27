@@ -20,7 +20,22 @@ module.exports.home = function(req,res){
     // }); 
 
     // populate the user of this post, whole user will be sent along with the post, we just display the name there in homee.ejs
-    Post.find({}).populate('user').exec(function(err,posts){
+    // Post.find({}).populate('user').exec(function(err,posts){
+    //     return res.render('home',{
+    //         title: "Codeial | Home",
+    //         posts: posts 
+    //     });
+    // });
+
+    Post.find({})
+    .populate('user')
+    .populate({
+        path: 'comments',
+        populate: {
+            path: 'user'
+        }
+    })
+    .exec(function(err,posts){
         return res.render('home',{
             title: "Codeial | Home",
             posts: posts 
