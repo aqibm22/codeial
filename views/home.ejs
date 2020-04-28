@@ -1,36 +1,36 @@
-<!-- dont need html tags and all as layout handles all of that -->
-<h1>
-    Codeial / <%= title %>
-</h1>
- 
+<link rel="stylesheet" href="/css/home.css">
 
-<section id="feed-posts">
-    <h4>Posts</h4>
-    <!-- form is only visible to users which are signed in -->
-    <% if(locals.user){ %> 
-        <form action="posts/create" id="new-post-form" method="POST">
-            <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
-            <input type="Submit" value="Post">
-        </form>
-    <% } %>
-    <!-- displaying the posts along with the name of the author-->
-    <div id="posts-list-container">
-        <ul>
-            <% for(post of posts){  %>
-                
-                <%- include('_post') -%>
+<div id="home-container">
+    <section id="feed-posts">
+        <h4>Posts</h4>
+        <!-- form is only visible to users which are signed in -->
+        <% if(locals.user){ %> 
+            <form action="posts/create" id="new-post-form" method="POST">
+                <textarea name="content" cols="30" rows="3" placeholder="Type Here..."></textarea>
+                <input type="Submit" value="Post">
+            </form>
+        <% } %>
+        <!-- displaying the posts along with the name of the author-->
+        <div id="posts-list-container">
+            <ul>
+                <% for(post of posts){  %>
+                    
+                    <%- include('_post') -%>
+    
+                <% } %>
+            </ul>
+        </div>
+    </section>
+    
+    <!-- to display all the users/friends -->
+    <section id="user-friends">
+        <h4>Friends</h4>
+        <% for(u of all_users){ %>
+            <P>
+                <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+            </P>
+        <% } %>
+    </section>
+</div>
 
-            <% } %>
-        </ul>
-    </div>
-</section>
 
-<!-- to display all the users/friends -->
-<section id="user-friends">
-    <h4>Friends</h4>
-    <% for(u of all_users){ %>
-        <P>
-            <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
-        </P>
-    <% } %>
-</section>
