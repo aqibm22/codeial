@@ -11,6 +11,17 @@ module.exports.profile = function(req,res){
     });
 }
 
+module.exports.update = function(req,res){
+    if(req.user.id == req.params.id){ //checking if user sending the request and the one whose credentials are to be updated are same
+        // instead of req.body we could have writtern {name: req.body.name , email: req.body.email} but instead we update in db as all fields of body are same in db as well
+        User.findByIdAndUpdate(req.params.id, req.body, function(err,user){
+            return res.redirect('back');
+        });
+    }else{
+        return res.status(401).send('Unauthorized'); // like 404 error etc.
+    }
+}
+
 // render the sign Up page
 module.exports.signUp = function(req,res){
      // to avoid accessing of sign in page if user is logged in

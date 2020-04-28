@@ -9,7 +9,7 @@ const usersController = require('../controllers/users_controller');
 // so this will be accessed by /users/profile
 // /:id added when we wanted to display all friends
 router.get('/profile/:id', passport.checkAuthentication,usersController.profile);
-
+router.post('/update/:id', passport.checkAuthentication,usersController.update);
 
 
 router.get('/sign-up',usersController.signUp);
