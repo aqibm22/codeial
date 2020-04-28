@@ -1,5 +1,5 @@
 const Post = require('../models/post');
-
+const User = require('../models/user');
 
 // all functiomn here is accesed by controller
 ///format- 
@@ -27,6 +27,21 @@ module.exports.home = function(req,res){
     //     });
     // });
 
+    // Post.find({})
+    // .populate('user') // user sent along with the post as done above
+    // .populate({
+    //     path: 'comments',
+    //     populate: {
+    //         path: 'user' // the author of the comment is sent for every post
+    //     }
+    // })
+    // .exec(function(err,posts){
+    //     return res.render('home',{
+    //         title: "Codeial | Home",
+    //         posts: posts 
+    //     });
+    // });
+
     Post.find({})
     .populate('user') // user sent along with the post as done above
     .populate({
@@ -36,9 +51,13 @@ module.exports.home = function(req,res){
         }
     })
     .exec(function(err,posts){
-        return res.render('home',{
-            title: "Codeial | Home",
-            posts: posts 
+        // using user to send all the users because we need to display it
+        User.find({},function(err,users){
+            return res.render('home',{
+                title: "Codeial | Home",
+                posts: posts,
+                all_users: users
+            });
         });
     });
 }
