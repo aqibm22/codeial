@@ -30,12 +30,12 @@ module.exports.destroy = function(req,res){
             let postId = comment.post; // this is the post where we have to delete the current comment
             // removing the desired comment from db Comment
             comment.remove(); 
-            // pulling out desired comment which is in req.params.id from postId in db Post by using the below function - 
+            // pulling out desired comment which is in req.params.id from postId/comments array by using the below function - 
             Post.findByIdAndUpdate(postId , { $pull: {comments: req.params.id} }, function(err, post){
                 return res.redirect('back');
             });
         }else{
             return res.redirect('back');
         }
-    })
+    });
 }
