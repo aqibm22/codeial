@@ -14,6 +14,12 @@ const MongoStore = require('connect-mongo')(session);
 //for sass-
 const sassMiddleware = require('node-sass-middleware');
 
+//for flash messages - first do npm install connect-flash
+const flash = require('connect-flash');
+// using our own created middleware.js for flash messages-
+const customMware = require('./config/middleware');
+
+
 app.use(sassMiddleware({
     src: './assets/scss',
     dest: './assets/css',
@@ -66,6 +72,12 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(passport.setAuthenticatedUser);
+
+
+// setting up flash after session code as flash require session
+app.use(flash());
+// using middleware.js
+app.use(customMware.setFlash); // the position of such type of statements are imp
 
 //must be placed after passport--
 //use express router
