@@ -36,7 +36,7 @@ module.exports.destroy = async function(req,res){
     
             await Comment.deleteMany({post: req.params.id});
 
-            req.flash('success', 'Post and associated comments deleted');
+            req.flash('success', 'Post and associated comments deleted!');
             return res.redirect('back');
         }else{
 
@@ -46,6 +46,6 @@ module.exports.destroy = async function(req,res){
 
     }catch(err){
         req.flash('error', err);
-        return;
+        return res.redirect('back');
     }
 }
