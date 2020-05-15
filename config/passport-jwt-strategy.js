@@ -7,7 +7,7 @@ const User = require('../models/user');
 // see JWT article for more details 
 // secretOrKey is the encoding key
 let opts = {
-    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: 'codeial'
 }
 
