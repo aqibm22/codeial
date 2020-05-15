@@ -9,7 +9,7 @@ module.exports.create = async function(req,res){
         }); 
         // checking if the request is coming through ajax or not
         if(req.xhr){
-            post=await post.populate('user').execPopulate();
+            post=await post.populate('user').execPopulate();// tbis line displayed the name of the author of the post 
             return res.status(200).json({
                 data : {
                     post: post

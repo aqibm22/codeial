@@ -20,7 +20,7 @@ module.exports.home = async function(req,res){
             populate: {
                 path: 'user' // the author of the comment is sent for every post
             }
-        })
+        });
         let users =  await User.find({});
 
         return res.render('home',{
