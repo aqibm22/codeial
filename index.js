@@ -34,6 +34,9 @@ app.use(cookieParser());
 
 app.use(express.static('./assets'));
 
+//making the uploads folder path available to the browser for showing the avatar
+app.use('/uploads',express.static(__dirname + '/uploads'));
+
 //to use the layout library-
 //always place this above the routes as routes require the library
 app.use(expressLayouts);

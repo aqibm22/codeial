@@ -1,9 +1,8 @@
 <link rel="stylesheet" href="/css/user_profile.css">
 
 <!-- dont need html tags and all as layout handles all of that -->
-<h1>
-    Codeial / Profile Page
-</h1>
+<img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
+
    
 <!-- user.id used for string matching -->
 <% if(user.id == profile_user.id){ %> 
