@@ -1,5 +1,6 @@
 const User = require('../models/user');
-
+const fs = require('fs');
+const path = require('path');
 // accessed via /users/profile
 // changes done to display friends
 module.exports.profile = function(req,res){
@@ -25,6 +26,15 @@ module.exports.update = async function(req,res){
                 user.email = req.body.email;
                 // only when user is uplaoding a file
                 if(req.file){
+
+                    // if the user already has a avatar then delete the current avatar--
+                    if(user.avatar){
+                        if(fs.existsSync(path.join(__dirname, '..' , user.avatar))){ // checking if the cuurent avatar acyually points to a file or is that somehow deleted physically
+                            fs.unlinkSync(path.join(__dirname, '..' , user.avatar));
+                        }
+                        // if deleted physically then do nothing and put the new avatar
+                    }
+
                     // saving the path of the uplaoded file into the avatar field in the user in the database
                     user.avatar = User.avatarPath + '/' + req.file.filename
                 }
