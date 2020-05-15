@@ -8,10 +8,12 @@
 <!-- user.id used for string matching -->
 <% if(user.id == profile_user.id){ %> 
     <!-- if user matches i.e. the user is viewing his owm profile,then show the update form -->
-    <form action="/users/update/<%= profile_user.id %>" method="POST">
+    <form action="/users/update/<%= profile_user.id %>" enctype="multipart/form-data" method="POST">
         <!-- Sending the value="<%= profile_user.name %>" because we want to edit that -->
         <input type="text" name="name" placeholder="Your Name" value="<%= profile_user.name %>" required>
         <input type="email" name="email" placeholder="Your Email" value="<%= profile_user.email %>" required>
+        
+        <input type="file" name="avatar" placeholder="Profile Picture">
         <input type="submit" value="Update">;
     </form>
 <%}else{%>

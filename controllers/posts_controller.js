@@ -41,7 +41,7 @@ module.exports.destroy = async function(req,res){
                     data : {
                         post_id: req.params.id
                     },
-                    message: "Pose deleted"
+                    message: "Post deleted"
                 });
             }
 

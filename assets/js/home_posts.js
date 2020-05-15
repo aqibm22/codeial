@@ -1,4 +1,24 @@
 {   
+    function successMsg(msg){
+        new Noty({
+            theme:'relax',
+            text: msg,
+            type:'success',
+            layout:'topRight',
+            timeout:1500
+        }).show();
+    }
+    function errorMsg(msg){
+        new Noty({
+            theme:'relax',
+            text: msg,
+            type:'error',
+            layout:'topRight',
+            timeout:1500
+        }).show();
+    }
+    
+    
     // method to submit the form data for new post using AJAX
     let createPost = function(){
         let newPostForm = $('#new-post-form');
@@ -13,7 +33,8 @@
                 success: function(data){
                     let newPost = newPostDom(data.data.post);
                     $('#posts-list-container>ul').prepend(newPost);
-                    deletePost($(' .delete-post-button', newPost));
+                    deletePost($(' .delete-post-button', newPost)); // notice the space
+                    successMsg('Post created successfully!'); 
                 }, error: function(error){
                     console.log(error.responseText);
                 }
@@ -67,6 +88,7 @@
                 url : $(deleteLink).prop('href'), // this is how u access info in a tag
                 success : function(data){
                     $(`#post-${data.data.post_id}`).remove();
+                    successMsg('Post deleted successfully!'); 
                 }, error: function(error){
                     console.log(error.responseText);
                 }
