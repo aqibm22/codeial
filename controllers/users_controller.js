@@ -11,15 +11,37 @@ module.exports.profile = function(req,res){
     });
 }
 
-module.exports.update = function(req,res){
-    if(req.user.id == req.params.id){ //checking if user sending the request and the one whose credentials are to be updated are same
-        // instead of req.body we could have writtern {name: req.body.name , email: req.body.email} but instead we update in db as all fields of body are same in db as well
-        User.findByIdAndUpdate(req.params.id, req.body, function(err,user){
+module.exports.update = async function(req,res){
+    if(req.user.id == req.params.id){
+        try{
+
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req,res,function(err){
+                if(err){
+                    console.log('*****Multer Error: ', err);
+                }
+                // if name and email is changed update it too
+                user.name = req.body.name;
+                user.email = req.body.email;
+                // only when user is uplaoding a file
+                if(req.file){
+                    // saving the path of the uplaoded file into the avatar field in the user in the database
+                    user.avatar = User.avatarPath + '/' + req.file.filename
+                }
+                user.save();
+                return res.redirect('back');
+            });
+
+        }catch(err){
+            req.flash('error',err);
             return res.redirect('back');
-        });
+        }
+
     }else{
-        return res.status(401).send('Unauthorized'); // like 404 error etc.
+        req.flash('error', 'Unauthorized');
+        return res.status(401).send('Unauthorized');
     }
+
 }
 
 // render the sign Up page
