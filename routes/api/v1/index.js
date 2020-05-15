@@ -5,5 +5,6 @@ const router = express.Router();
 
 //give control to the posts.js in this v1 folder itself
 router.use('/posts',require('./posts'));
+router.use('/users',require('./users'));
 
 module.exports = router;

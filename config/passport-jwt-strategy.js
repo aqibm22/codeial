@@ -8,7 +8,7 @@ const User = require('../models/user');
 // secretOrKey is the encoding key
 let opts = {
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken,
-    secretOrKey = 'codeial'
+    secretOrKey: 'codeial'
 }
 
 passport.use( new JWTStrategy(opts , function(jwtPayLoad , done){
