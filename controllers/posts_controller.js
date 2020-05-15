@@ -9,6 +9,7 @@ module.exports.create = async function(req,res){
         }); 
         // checking if the request is coming through ajax or not
         if(req.xhr){
+            post=await post.populate('user').execPopulate();
             return res.status(200).json({
                 data : {
                     post: post

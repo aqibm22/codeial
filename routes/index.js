@@ -27,5 +27,8 @@ router.use('/posts',require('./posts'));
 // to use comments route-
 router.use('/comments',require('./comments'));
 
+// as api is in a different folder. this will give control to the index.js of the api folder in routes
+router.use('/api',require('./api'));
+
 module.exports = router;
 
