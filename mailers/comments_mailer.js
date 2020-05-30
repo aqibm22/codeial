@@ -2,7 +2,6 @@ const nodeMailer = require('../config/nodemailer');
 
 // this is another way of exporting a function 
 exports.newComment = (comment) => {
-    // rendering the template
     let htmlString = nodeMailer.renderTemplate({comment: comment} , '/comments/new_comment.ejs');
 
     nodeMailer.transporter.sendMail({

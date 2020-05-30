@@ -2,6 +2,8 @@ const Comment = require('../models/comment');
 const Post = require('../models/post');
 const commentsMailer = require('../mailers/comments_mailer');
 
+
+
 // async await added in both create and destroy function 
 // to see explanation of code see commits before 29th April, 2020
 module.exports.create = async function(req, res){
@@ -22,6 +24,7 @@ module.exports.create = async function(req, res){
             comment = await comment.populate('user' , 'name email').execPopulate();
             
             commentsMailer.newComment(comment);
+
             req.flash('success', 'Comment added!');
             res.redirect('back');
         }
